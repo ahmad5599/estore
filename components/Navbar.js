@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 
 import { TbShoppingCart } from "react-icons/tb";
-import { BsFillBagCheckFill } from "react-icons/bs";
+import { BsFillBagCheckFill, BsFillCartXFill } from "react-icons/bs";
 
 import {
   AiFillCloseCircle,
@@ -77,7 +77,7 @@ function Navbar({ cart, addToCart, removeFromCart, clearCart, subTotal }) {
                     <div className="w-2/3 font-semibold flex items-center justify-start ">
                       {cart[k].name}
                     </div>
-                    <div className="w-1/3 font-semibold flex items-center justify-center ">
+                    <div className="w-1/3 text-lg font-semibold flex items-center justify-center ">
                       <AiFillPlusCircle
                         onClick={() => {
                           addToCart(
@@ -89,7 +89,7 @@ function Navbar({ cart, addToCart, removeFromCart, clearCart, subTotal }) {
                             cart[k].variant
                           );
                         }}
-                        className="cursor-pointer mx-1 text-5xl"
+                        className="cursor-pointer mx-1 text-7xl"
                       />
                       {cart[k].qty}
                       <AiFillMinusCircle
@@ -103,7 +103,7 @@ function Navbar({ cart, addToCart, removeFromCart, clearCart, subTotal }) {
                             cart[k].variant
                           );
                         }}
-                        className="cursor-pointer mx-1 text-5xl"
+                        className="cursor-pointer mx-1 text-7xl"
                       />
                     </div>
                   </div>
@@ -112,17 +112,22 @@ function Navbar({ cart, addToCart, removeFromCart, clearCart, subTotal }) {
             })}
           </ol>
           <div className="flex">
-            <button className="flex mx-2 text-green bg-slate-50 border-0 py-2 px-2 focus:outline-none hover:bg-slate-50 rounded text-sm">
-              <BsFillBagCheckFill className="m-1" />
-              Checkout
-            </button>
+            <Link href={"/checkout"}>
+              <button className="flex mx-2 text-green bg-slate-50 border-0 py-2 px-2 focus:outline-none hover:bg-slate-50 rounded text-md">
+                <BsFillBagCheckFill className="m-1 text-lg" />
+                Checkout
+              </button>
+            </Link>
             <button
               onClick={clearCart}
-              className="flex mx-2 text-green bg-slate-50 border-0 py-2 px-2 focus:outline-none hover:bg-slate-50 rounded text-sm"
+              className="flex mx-2 text-green bg-slate-50 border-0 py-2 px-2 focus:outline-none hover:bg-slate-50 rounded text-md"
             >
-              <BsFillBagCheckFill className="m-1" /> ClearCart
+              <BsFillCartXFill className=" text-lg m-1" /> ClearCart
             </button>
           </div>
+          <span className="subTotal flex mx-11 justify-center items-center my-8 text-green bg-slate-200 border-0 py-2 px-2  rounded text-md ">
+            SubTotal : {subTotal}
+          </span>
         </div>
       </header>
     </div>

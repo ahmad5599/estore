@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRef } from "react";
 
 const Slug = ({ addToCart }) => {
   const router = useRouter();
@@ -21,6 +22,8 @@ const Slug = ({ addToCart }) => {
   const onChangePin = (e) => {
     setpin(e.target.value);
   };
+
+  const ref = useRef();
 
   return (
     <>
@@ -183,9 +186,15 @@ const Slug = ({ addToCart }) => {
                 </span>
                 <button
                   onClick={() => {
-                    addToCart(slug, 1, 566, "bend the trend", "xl", "red");
+                    addToCart(slug, 1, 566, "bend the trend", "xl", "slate");
+                    ref.current.classList.remove("hidden");
+                    ref.current.classList.add("block");
+                    setTimeout(() => {
+                      ref.current.classList.remove("block");
+                      ref.current.classList.add("hidden");
+                    }, 7000);
                   }}
-                  className="flex mr-7  ml-11 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                  className="flex mr-7  ml-11 text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none  hover:bg-indigo-600 rounded"
                 >
                   Add to Cart
                 </button>
@@ -211,13 +220,13 @@ const Slug = ({ addToCart }) => {
                 />
                 <button
                   onClick={checkServersbility}
-                  className="flex  ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                  className="flex  ml-auto text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"
                 >
                   Check
                 </button>
               </div>
               {!service && service != null && (
-                <div className="text-red-700 ml-3 text-sm mt-3">
+                <div className="text-slate-700 ml-3 text-sm mt-3">
                   sorry! we do not deliver to this pincode yet
                 </div>
               )}
@@ -226,6 +235,34 @@ const Slug = ({ addToCart }) => {
                   Yay! This pincode is deliverable
                 </div>
               )}
+
+              <div
+                ref={ref}
+                className="bg-slate-100 border hidden mt-5 border-slate-400 text-slate-700 px-4 py-3 rounded relative"
+                role="alert"
+              >
+                <strong className="font-bold">Added: </strong>
+                <span className="block sm:inline">
+                  This item has been added to your cart.
+                </span>
+                <span
+                  onClick={() => {
+                    ref.current.classList.remove("block");
+                    ref.current.classList.add("hidden");
+                  }}
+                  className="absolute top-0 bottom-0 right-0 px-4 py-3"
+                >
+                  <svg
+                    className="fill-current h-6 w-6 text-slate-500"
+                    role="button"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <title>Close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                  </svg>
+                </span>
+              </div>
             </div>
           </div>
         </div>
