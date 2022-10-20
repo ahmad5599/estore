@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 
 import { TbShoppingCart } from "react-icons/tb";
+import { MdOutlineAccountBox } from "react-icons/md";
 import { BsFillBagCheckFill, BsFillCartXFill } from "react-icons/bs";
 
 import {
@@ -48,16 +49,27 @@ function Navbar({ cart, addToCart, removeFromCart, clearCart, subTotal }) {
               <a className="mr-5 hover:text-gray-900">Stickers</a>
             </Link>
           </nav>
-          <button
-            onClick={showCart}
-            className="inline-flex items-center bg-gray-300 border-0 py-1 px-3 focus:Fill-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-          >
-            <TbShoppingCart />
-          </button>
+          <div className="flex flex-row">
+            <button
+              onClick={showCart}
+              className="inline-flex items-center bg-gray-300 border-0 py-1 px-3 focus:Fill-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            >
+              <TbShoppingCart />
+            </button>
+            <Link href={"/login"}>
+              <button className="inline-flex items-center ml-3 bg-gray-300 border-0 py-1 px-3 focus:Fill-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+                <MdOutlineAccountBox />
+              </button>
+            </Link>
+          </div>
         </div>
         <div
           ref={ref}
-          className="w-72 h-[100vh] sideCart absolute top-0 right-0 bg-slate-300 p-10 trasform transition-transform translate-x-full  px-8 shadow-2xl rounded-md z-10"
+          className={`w-72 h-[100vh] sideCart absolute top-0 right-0 bg-slate-300 p-10 trasform transition-transform ${
+            Object.keys(cart).length !== 0
+              ? "translate-x-0"
+              : "translate-x-full"
+          }  px-8 shadow-2xl rounded-md z-10`}
         >
           <h2 className="font-bold text-xl text-center">Shoping Cart</h2>
           <span
